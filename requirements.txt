@@ -14,7 +14,7 @@ streamlit
 Markdown
 matplotlib
 google-genai
-selenium
 pydantic
 google-cloud-texttospeech
 moviepy==1.0.3
+mplfinance

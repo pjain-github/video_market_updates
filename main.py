@@ -1,10 +1,15 @@
 import os
 from dotenv import load_dotenv
-from search import index, fii_dii, news, recommendation
+# from search import index, fii_dii, news, recommendation
 from data.google_search import GoogleSearch
 from ai.gemini_util import Gemini
 from ai.audio_util import AudioUtil
-from video.complete_simple_video import generate_video
+from video.merge_video import merge_videos
+from pages.index.index import Index
+from pages.news.news import News
+from pages.stocks.stocks import Stocks
+from pages.first_page.first_page import FirstPage
+from pages.last_page.last_page import LastPage
 
 load_dotenv()
 
@@ -20,26 +25,25 @@ def main():
 
     gsc = GoogleSearch(api_key=google_api_key, cse_id=google_cse_id)
 
-    index_search = index.IndexSearch(google_search_class=gsc, gl='in', llm_class=gemini, audio_class=audioutil) 
-    index_updates, index_image_path, index_audio_path =  index_search.index_updates()
+    video1 = FirstPage.first_page()
 
-    news_search = news.NewsSearch(google_search_class=gsc, gl='in', llm_class=gemini, audio_class=audioutil) 
-    news_updates, news_image_path, news_audio_path =  news_search.news_updates()
+    index_search = Index(google_search_class=gsc, gl='in', llm_class=gemini, audio_class=audioutil) 
+    video2 = index_search.index_slide()
 
-    fii_dii_search = fii_dii.FiiDiiSearch(google_search_class=gsc, gl='in', llm_class=gemini, audio_class=audioutil) 
-    fii_dii_updates, fii_dii_image_path, fii_dii_audio_path =  fii_dii_search.fii_dii_updates()
+    news_search = News(google_search_class=gsc, gl='in', llm_class=gemini, audio_class=audioutil) 
+    video3 =  news_search.news_slide()
 
-    generate_video(
-        [index_image_path, news_image_path[0], news_image_path[1],  fii_dii_image_path], 
-        [index_audio_path, news_audio_path, fii_dii_audio_path],
-        "elements/market_updates.png", "elements/intro_audio.wav", "elements/end_screen.png", "elements/outro_audio.wav", "elements/video.mp4")
+    stocks_search = Stocks(google_search_class=gsc, gl='in', llm_class=gemini, audio_class=audioutil)
+    video4 = stocks_search.stocks_slide()
 
-    # generate_video(
-    #     ['elements/slide_1.png', 'elements/slide_2.png', 'elements/slide_3.png',  'elements/slide_4.png'], 
-    #     ['elements/index_updates.wav', 'elements/news_updates.wav', 'elements/fii_dii_updates.wav'],
-    #     "elements/market_updates.png", "elements/intro_audio.wav", "elements/end_screen.png", "elements/outro_audio.wav", "elements/video.mp4")
+    video5 = LastPage.last_page()
 
+    final_video = merge_videos([video1, video2, video3, video4, video5])
+
+    return final_video
+
+    # final_video.write_videofile("output.mp4", fps=30, codec="libx264", threads=4)
 
 if __name__ == "__main__":
-    main()
+    print(main())
 

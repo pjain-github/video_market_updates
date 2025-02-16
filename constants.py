@@ -1,9 +1,15 @@
 nifty_webistes = None#['www.moneycontrol.com', 'www.nseindia.com', 'https://www.livemint.com/']
 nifty_queries = ["nifty updates"]
+nifty_data = ['https://www.equitypandit.com/share-price/today/nifty-50-historical-data']
+index_data = ['https://www.livemint.com/market/india-indices-nse']
 
 news_webistes = ['economictimes.indiatimes.com', 'www.moneycontrol.com', 'https://www.livemint.com/']
-news_queries = ["latest news on stocks"]
-news_fixed_links = ['https://www.moneycontrol.com/news/business/markets/', 'https://economictimes.indiatimes.com/markets/stocks/live-blog/bse-sensex-today-live-nifty-stock-market-updates-11-february-2025/liveblog/118131028.cms']
+news_queries = ["market accounements"]
+news_fixed_links = ['https://www.moneycontrol.com/news/business/markets/', 'https://economictimes.indiatimes.com/markets/stocks/live-blog/bse-sensex-today-live-nifty-stock-market-updates-14-february-2025/liveblog/118230190.cms']
+
+stocks_webistes = ['economictimes.indiatimes.com', 'www.moneycontrol.com', 'https://www.livemint.com/']
+stocks_queries = ["market accounements"]
+stocks_fixed_links = ['https://www.moneycontrol.com/news/business/markets/', 'https://economictimes.indiatimes.com/markets/stocks/live-blog/bse-sensex-today-live-nifty-stock-market-updates-14-february-2025/liveblog/118230190.cms']
 
 fii_dii_webistes = None
 fii_dii_queries = ["fii and dii news"]

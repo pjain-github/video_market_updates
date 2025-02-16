@@ -210,6 +210,81 @@ class WebScraper:
 
         except:
             return None, None
+            
+    @staticmethod    
+    def get_nifty_table_table_from_article(url):
+
+        def truncate_base64(content):
+            """Truncate base64-encoded data to only keep till 'jpeg'"""
+            if "base64" in content:
+                parts = content.split("base64,")
+                return parts[0] if len(parts) > 1 else content
+            return content
+
+        try:
+            logging.info(f"Fetching webpage content from {url}")
+            response = requests.get(url)
+            soup = BeautifulSoup(response.content, 'html.parser')
+
+            # List to store extracted content
+            content_list = []
+
+            # Iterate over all elements in the body
+            for element in soup.body.descendants:
+
+                if element.name == 'table':  # Tables
+                    table_html = str(element)
+                    content_list.append({'type': 'table', 'content': truncate_base64(table_html)})
+
+            table = []
+
+            # Stringify the extracted content
+            for item in content_list:
+                if item['type'] == 'table':
+                    if "<h3>Nifty 50 Historical Data</h3>" in item['content']:
+                        table.append(item['content'])
+
+            logging.info(f"Webscrapping completed from {url}")
+
+            return table
+
+        except:
+            return None
+        
+    def get_idex_table_from_article(url):
+
+        def truncate_base64(content):
+            """Truncate base64-encoded data to only keep till 'jpeg'"""
+            if "base64" in content:
+                parts = content.split("base64,")
+                return parts[0] if len(parts) > 1 else content
+            return content
+
+        if 1:
+            logging.info(f"Fetching webpage content from {url}")
+            response = requests.get(url)
+            soup = BeautifulSoup(response.content, 'html.parser')
+
+            # List to store extracted content
+            content_list = []
+
+            # Iterate over all elements in the body
+            for element in soup.body.descendants:
+
+                if element.name == 'table':  # Tables
+                    table_html = str(element)
+                    content_list.append({'type': 'table', 'content': truncate_base64(table_html)})
+
+            table = []
+
+            # Stringify the extracted content
+            for item in content_list:
+                if item['type'] == 'table':
+                    table.append(item['content'])
+
+            logging.info(f"Webscrapping completed from {url}")
+
+            return table
 
     # def extract_content_with_sequence(url):
     #     try:
