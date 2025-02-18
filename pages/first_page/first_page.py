@@ -11,6 +11,7 @@ def first_image(date=None):
         formatted_date = today.strftime("%d %B %Y")
         date = str(formatted_date)
 
+    print(date)
 
     # Image dimensions (Full HD)
     width = 1920
@@ -118,3 +119,7 @@ class FirstPage:
         video = create_video_with_audio_saved(audio_path=audio, image=image)
 
         return video
+    
+
+if __name__ == "__main__":
+    print(FirstPage.first_page())

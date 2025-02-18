@@ -3,7 +3,7 @@ from pydantic import BaseModel, Field
 from typing import List
 from pages.news.slides import ImageGenerator
 from video.video import create_video_with_audio
-
+from data.economic_article import get_latest_market_highlights
 
 # Pydantic
 # Define the Description model
@@ -15,7 +15,7 @@ class Slide(BaseModel):
 
 class News:
 
-    def __init__(self, google_search_class, llm_class, audio_class,gl='in'):
+    def __init__(self, google_search_class, llm_class, audio_class,gl='in', links=None):
         self.gsc = google_search_class
         self.websites = news_webistes
         self.queries = news_queries
@@ -23,8 +23,14 @@ class News:
         self.llm = llm_class
         self.fixed_links = news_fixed_links
         self.audio = audio_class
+        if links:
+            self.fixed_links = links
 
     def news_slide(self):
+
+        # Getting live feed from economic times:
+        et_link = get_latest_market_highlights()
+        self.fixed_links.append(et_link)
         
         params = {
             'num': 5,
@@ -84,7 +90,7 @@ class News:
             Ensure the commentary is insightful, structured, and free from generic statements.
             Use a formal but engaging tone to make the briefing clear and actionable.
             The speech should be detailed, analytical, and connect different updates logically.
-            This slide and speech are part of a long presentation, so do not include any salutations or greetings, like hi, good morning.
+            This slide and speech are part of a long presentation, so strictly ignore any salutations or greetings, like hi, good morning from the speech.
 
         """
 

@@ -3,6 +3,7 @@ from pydantic import BaseModel, Field
 from typing import List
 from pages.news.slides import ImageGenerator
 from video.video import create_video_with_audio
+from data.economic_article import get_latest_market_highlights
 
 
 # Pydantic
@@ -15,7 +16,7 @@ class Slide(BaseModel):
 
 class Stocks:
 
-    def __init__(self, google_search_class, llm_class, audio_class,gl='in'):
+    def __init__(self, google_search_class, llm_class, audio_class,gl='in', links= None):
         self.gsc = google_search_class
         self.websites = stocks_webistes
         self.queries = stocks_queries
@@ -23,8 +24,14 @@ class Stocks:
         self.llm = llm_class
         self.fixed_links = stocks_fixed_links
         self.audio = audio_class
+        if links:
+            self.fixed_links = links
 
     def stocks_slide(self):
+
+        # Getting live feed from economic times:
+        et_link = get_latest_market_highlights()
+        self.fixed_links.append(et_link)
         
         params = {
             'num': 5,
@@ -73,6 +80,7 @@ class Stocks:
         Key Stock Updates (Bullet Points):
             Summarize the most significant stock-related insights in a maximum of 5 bullet points.
             Focus on corporate earnings, M&A activity, IPOs, share buybacks, dividend declarations, stock splits, regulatory actions, and major company announcements.
+            Dedicate maximum of one bullet point for each company.
             Highlight key movements in benchmark indices (Sensex, Nifty) and sectoral performance.
             Include insights on foreign and domestic institutional investor (FII/DII) activity impacting the stock market.
             Do not include generic market commentary or macroeconomic updates unless directly linked to stock market movements.

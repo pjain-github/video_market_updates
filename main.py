@@ -10,6 +10,7 @@ from pages.news.news import News
 from pages.stocks.stocks import Stocks
 from pages.first_page.first_page import FirstPage
 from pages.last_page.last_page import LastPage
+import io
 
 load_dotenv()
 
@@ -18,7 +19,7 @@ google_api_key = os.getenv('GOOGLE_API_KEY')
 google_cse_id = os.getenv('GOOGLE_SEARCH_CSE_ID')
 gemini_api_key = os.getenv('GOOGLE_API_KEY')
 
-def main():
+def main(news_links=None, stocks_links=None):
 
     gemini = Gemini(api_key=gemini_api_key)
     audioutil = AudioUtil()
@@ -30,10 +31,10 @@ def main():
     index_search = Index(google_search_class=gsc, gl='in', llm_class=gemini, audio_class=audioutil) 
     video2 = index_search.index_slide()
 
-    news_search = News(google_search_class=gsc, gl='in', llm_class=gemini, audio_class=audioutil) 
+    news_search = News(google_search_class=gsc, gl='in', llm_class=gemini, audio_class=audioutil, links=news_links) 
     video3 =  news_search.news_slide()
 
-    stocks_search = Stocks(google_search_class=gsc, gl='in', llm_class=gemini, audio_class=audioutil)
+    stocks_search = Stocks(google_search_class=gsc, gl='in', llm_class=gemini, audio_class=audioutil, links=stocks_links)
     video4 = stocks_search.stocks_slide()
 
     video5 = LastPage.last_page()
@@ -42,8 +43,15 @@ def main():
 
     return final_video
 
-    # final_video.write_videofile("output.mp4", fps=30, codec="libx264", threads=4)
+    final_video.write_videofile("output.mp4", fps=30, codec="libx264", threads=4)
+
+# def main():
+#     video_io = io.BytesIO()
+#     with open('merged_video.mp4', "rb") as f:
+#         video_io.write(f.read())
+#     video_io.seek(0)
+#     return video_io
 
 if __name__ == "__main__":
-    print(main())
+    main()
 

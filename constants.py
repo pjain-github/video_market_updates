@@ -5,11 +5,11 @@ index_data = ['https://www.livemint.com/market/india-indices-nse']
 
 news_webistes = ['economictimes.indiatimes.com', 'www.moneycontrol.com', 'https://www.livemint.com/']
 news_queries = ["market accounements"]
-news_fixed_links = ['https://www.moneycontrol.com/news/business/markets/', 'https://economictimes.indiatimes.com/markets/stocks/live-blog/bse-sensex-today-live-nifty-stock-market-updates-14-february-2025/liveblog/118230190.cms']
+news_fixed_links = ['https://www.moneycontrol.com/news/business/markets/']
 
 stocks_webistes = ['economictimes.indiatimes.com', 'www.moneycontrol.com', 'https://www.livemint.com/']
 stocks_queries = ["market accounements"]
-stocks_fixed_links = ['https://www.moneycontrol.com/news/business/markets/', 'https://economictimes.indiatimes.com/markets/stocks/live-blog/bse-sensex-today-live-nifty-stock-market-updates-14-february-2025/liveblog/118230190.cms']
+stocks_fixed_links = ['https://www.moneycontrol.com/news/business/markets/']
 
 fii_dii_webistes = None
 fii_dii_queries = ["fii and dii news"]
@@ -18,8 +18,6 @@ fii_dii_fixed_links = ['https://www.nseindia.com/reports/fii-dii']
 post_market_webistes = None
 post_market_queries = ["post market analysis"]
 
-recommendation_webistes = None
-recommendation_queries = ["stock market recommendations"]
 
 audio_config = {
     "audioConfig": {

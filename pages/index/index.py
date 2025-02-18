@@ -77,7 +77,7 @@ class Index:
 
         Key Updates (Bullet Points):
             Summarize the most critical insights in a maximum of 3 bullet points.
-            Ensure that at least one point provides a general market update on the NIFTY, BANK NIFTY and MIDCAP NIFTY index's movement (e.g., overall gain/loss, percentage change).
+            Ensure that at least one point provides a general market update on the NIFTY, BANK NIFTY and MIDCAP NIFTY index's movement (e.g., overall gain/loss, percentage change). This is availabe in the table - Index Information.
             Include notable sector or stock-specific movements that have influenced the index.
             Mention key economic or geopolitical factors impacting the market.
             Avoid redundant or generic statements.

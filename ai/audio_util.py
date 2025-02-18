@@ -132,6 +132,9 @@ from constants import audio_config
 load_dotenv()
 
 google_service_account = os.getenv("GOOGLE_SERVICE_ACCOUNT")
+
+google_service_account = google_service_account.replace("\n", "\\n")
+
 google_service_account_dict = json.loads(google_service_account)
         
 # Create a temporary file to store credentials
